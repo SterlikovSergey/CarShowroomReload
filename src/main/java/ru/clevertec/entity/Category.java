@@ -32,6 +32,7 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Builder.Default
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Car> cars = new ArrayList<>();
 

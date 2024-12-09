@@ -54,17 +54,9 @@ public class Car {
     @JoinColumn(name = "showroom_id", nullable = true)
     private CarShowroom showroom;
 
+    @Builder.Default
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
-
-    public Car(String model, String brand, int year, double price, Category category, CarShowroom showroom) {
-        this.model = model;
-        this.brand = brand;
-        this.year = year;
-        this.price = price;
-        this.category = category;
-        this.showroom = showroom;
-    }
 
     @Override
     public String toString() {
