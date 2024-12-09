@@ -1,0 +1,24 @@
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  show_sql: true
+  format_sql: true
+  hbm2ddl:
+    auto: drop-and-create
+    hibernate:
+      cache:
+        use_second_level_cache: true
+        use_query_cache: true
+        region.factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+
+datasource:
+  driver-class-name: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/crud_db
+  username: postgres
+  password: root
+
+hibernate-search:
+  backend:
+    type: lucene
+    directory:
+      type: local-directory
+      root: src/main/resources/indexes
