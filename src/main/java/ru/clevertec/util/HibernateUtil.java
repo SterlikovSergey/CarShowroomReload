@@ -27,11 +27,11 @@ public class HibernateUtil {
             sessionFactory = new Configuration()
                     .addProperties(properties)
                     .addPackage("ru.clevertec.entity")
-/*                    .addAnnotatedClass(ru.clevertec.entity.Car.class)
+                    .addAnnotatedClass(ru.clevertec.entity.Car.class)
                     .addAnnotatedClass(ru.clevertec.entity.CarShowroom.class)
                     .addAnnotatedClass(ru.clevertec.entity.Client.class)
                     .addAnnotatedClass(ru.clevertec.entity.Category.class)
-                    .addAnnotatedClass(ru.clevertec.entity.Review.class)*/
+                    .addAnnotatedClass(ru.clevertec.entity.Review.class)
                     .buildSessionFactory();
         } catch (Throwable ex) {
             logger.error("Initial SessionFactory creation failed.", ex);
