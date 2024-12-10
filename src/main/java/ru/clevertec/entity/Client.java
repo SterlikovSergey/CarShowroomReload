@@ -40,6 +40,7 @@ public class Client {
     @Column(nullable = false)
     private String name;
 
+    @Builder.Default
     @ElementCollection
     @CollectionTable(name = "client_contacts", joinColumns = @JoinColumn(name = "client_id"))
     @MapKeyColumn(name = "contact_type")
@@ -49,6 +50,7 @@ public class Client {
     @Column(nullable = false)
     private LocalDate registrationDate;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
             name = "client_cars",
@@ -57,6 +59,7 @@ public class Client {
     )
     private List<Car> cars = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 }

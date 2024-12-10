@@ -40,6 +40,7 @@ public class CarShowroom {
     @Column(nullable = false)
     private String address;
 
+    @Builder.Default
     @OneToMany(mappedBy = "showroom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Car> cars = new ArrayList<>();
 
