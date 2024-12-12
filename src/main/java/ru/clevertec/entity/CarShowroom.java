@@ -43,14 +43,5 @@ public class CarShowroom {
     @Builder.Default
     @OneToMany(mappedBy = "showroom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Car> cars = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "CarShowroom{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
 }
 

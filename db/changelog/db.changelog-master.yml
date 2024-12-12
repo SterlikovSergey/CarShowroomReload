@@ -1,0 +1,175 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1"
+      author: "admin"
+      changes:
+        - createTable:
+            tableName: "categories"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "name"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "created_at"
+                  type: "timestamp"
+                  defaultValueComputed: "CURRENT_TIMESTAMP"
+
+  - changeSet:
+      id: "2"
+      author: "admin"
+      changes:
+        - createTable:
+            tableName: "car_showrooms"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "name"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "address"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: "3"
+      author: "admin"
+      changes:
+        - createTable:
+            tableName: "cars"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "model"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "brand"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "year"
+                  type: "int"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "price"
+                  type: "decimal"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "category_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "showroom_id"
+                  type: "bigint"
+              - foreignKeyConstraint:
+                  baseColumnNames: "category_id"
+                  baseTableName: "cars"
+                  referencedColumnNames: "id"
+                  referencedTableName: "categories"
+              - foreignKeyConstraint:
+                  baseColumnNames: "showroom_id"
+                  baseTableName: "cars"
+                  referencedColumnNames: "id"
+                  referencedTableName: "car_showrooms"
+
+  - changeSet:
+      id: "4"
+      author: "admin"
+      changes:
+        - createTable:
+            tableName: "clients"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "name"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "registration_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "contact"
+                  type: "jsonb"
+
+  - changeSet:
+      id: "5"
+      author: "admin"
+      changes:
+        - createTable:
+            tableName: "reviews"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "text"
+                  type: "text"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "rating"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "client_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "car_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - foreignKeyConstraint:
+                  baseColumnNames: "client_id"
+                  baseTableName: "reviews"
+                  referencedColumnNames: "id"
+                  referencedTableName: "clients"
+              - foreignKeyConstraint:
+                  baseColumnNames: "car_id"
+                  baseTableName: "reviews"
+                  referencedColumnNames: "id"
+                  referencedTableName: "cars"

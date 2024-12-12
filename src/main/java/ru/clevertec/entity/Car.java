@@ -57,16 +57,4 @@ public class Car {
     @Builder.Default
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
-                ", brand='" + brand + '\'' +
-                ", year=" + year +
-                ", price=" + price +
-                ", category=" + (category != null ? category.getName() : "null") +
-                '}';
-    }
 }

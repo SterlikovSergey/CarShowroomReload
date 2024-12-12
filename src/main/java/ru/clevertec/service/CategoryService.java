@@ -1,44 +1,40 @@
 package ru.clevertec.service;
 
-import org.hibernate.Hibernate;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import ru.clevertec.entity.Category;
-import ru.clevertec.repository.impl.CategoryRepository;
+import ru.clevertec.exception.CategoryNotFoundException;
+import ru.clevertec.repository.CategoryRepository;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
 public class CategoryService {
 
-    private final CategoryRepository categoryRepository = new CategoryRepository();
+    private final CategoryRepository categoryRepository;
 
     public void addCategory(Category category) {
         categoryRepository.save(category);
     }
 
-    public void updateCar(Category category) {
-        categoryRepository.update(category);
+    public void updateCategory(Long id, Category updatedCategory) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException("Category with ID " + id + " not found"));
+        category.setName(updatedCategory.getName());
+        categoryRepository.save(category);
     }
 
-    public void deleteCar(Category category) {
-        categoryRepository.delete(category);
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
     }
 
-    public Category getCarById(Long id) {
-        return categoryRepository.findById(id);
+    public Category getCategoryById(Long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException("Category with ID " + id + " not found"));
     }
 
-    public List<Category> getAllCars() {
+    public List<Category> getAllCategories() {
         return categoryRepository.findAll();
-    }
-
-    public Category findCategoryWithCars(Long categoryId) {
-        return categoryRepository.findCategoryWithCars(categoryId);
-    }
-
-    public Category findCategoryById(Long categoryId) {
-        Category category = categoryRepository.findById(categoryId);
-        if (category != null) {
-            Hibernate.initialize(category.getCars());
-        }
-        return category;
     }
 }
