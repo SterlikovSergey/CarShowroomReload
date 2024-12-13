@@ -30,7 +30,7 @@ public class Review {
     private String text;
 
     @Column(nullable = false)
-    private int rating;
+    private Long rating;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id", nullable = false)
@@ -39,17 +39,5 @@ public class Review {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
-
-
-    @Override
-    public String toString() {
-        return "Review{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                ", rating=" + rating +
-                ", clientName=" + (client != null ? client.getName() : "null") +
-                ", carModel=" + (car != null ? car.getModel() : "null") +
-                '}';
-    }
 }
 
